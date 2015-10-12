@@ -99,7 +99,7 @@
   [x]
   (if (< x 10)
     [x]
-    (conj (number->collection (quot x 10)) x)))
+    (conj (number->collection (quot x 10)) (rem x 10))))
 
 (defn collection->number
   [coll]

@@ -11,4 +11,15 @@
       (last)
       (cst/split #" msecs")
       (first)
-      (Double/parseDouble)))
+      (bigdec)))
+
+(defn show-time
+  ([f] (show-time f 10))
+  ([f n]
+   (let [times (for [i (repeat n 1)]
+                 (time-me f))
+         sorted-times (->> times
+                           (sort))]
+     {:max (last  sorted-times)
+      :min (first sorted-times)
+      :average (/ (apply + times) n)})))
