@@ -1,5 +1,5 @@
 (ns eulinyo.euler.p003
-  (:require [eulinyo.core :refer [deft]]
+  (:require [eulinyo.core :refer [show-time]]
             [eulinyo.math :as m]
             [clojure.set :as cse]
             [clojure.string :as cst]))
