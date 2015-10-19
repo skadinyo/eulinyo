@@ -14,7 +14,7 @@
   (if (< x 10)
     true
     (let [xs (m/number->collection x)]
-      (if (some #{2 4 5 6 8} xs)
+      (if (some #{2 4 5 6 8 0} xs)
         false
         (let [c (count xs)]
           (->> (iterate move-back xs)
