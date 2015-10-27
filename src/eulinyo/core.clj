@@ -1,23 +1,19 @@
 (ns eulinyo.core
   (:require [clojure.set :as cse]
-            [clojure.string :as cst]))
+            [clojure.string :as cst]
+            [clj-time.core :as t]
+            [clj-time.coerce :as c]))
 
 (defn time-me
   [f]
-  (-> f
-      (time)
-      (with-out-str)
-      (cst/split #"time: ")
-      (last)
-      (cst/split #" msecs")
-      (first)
-      (bigdec)))
+  (with-out-str (time f)))
 
 (defn show-time
-  ([f] (show-time f 10))
+  ([f] (show-time f 1000))
   ([f n]
-   (let [times (for [i (repeat n 1)]
-                 (time-me f))
+   (let [tete (fn []
+                (time-me f))
+         times (repeatedly n tete)
          sorted-times (->> times
                            (sort))]
      {:max (last  sorted-times)
