@@ -17,8 +17,3 @@
          (drop-while #(<= (apply r %) lim))
          (first)
          ((juxt identity (partial apply r))))))
-
-(defn r-cal
-  [n a]
-  (rem (+ (pow (dec a) n) (pow (inc a) n))
-       (* a a)))
