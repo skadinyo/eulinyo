@@ -16,3 +16,27 @@
                        (mapv + coll)
                        put-one)]
         (recur (inc c) ncoll (conj res coll))))))
+
+(defn problem-203-a
+  []
+  (let [pascals (->> (pascal-tri 51)
+                     (apply concat)
+                     distinct)
+        max-p (->> (apply max pascals)
+                   Math/sqrt int inc)
+        primes (->> max-p
+                    (m/prime-sieve)
+                    (map #(*' % %))
+                    vec)
+        sqf? (fn [x]
+               (loop [[i & is] primes]
+                 (if i
+                   (if (< x i)
+                     true
+                     (if (= 0 (rem x i))
+                       false
+                       (recur is)))
+                   true)))]
+    (->> pascals
+         (filter sqf?)
+         (reduce +))))
